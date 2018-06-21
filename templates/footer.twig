@@ -1,1 +1,9 @@
-Copyright {{"now"|date('Y')}}
+<div class="copy">
+  <span>&copy; 2017-{{"now"|date('Y')}} {{ site.name }}</span>
+
+  {% if footer_menu %}
+    <nav class="footer" role="navigation">
+    	{% include 'menu.twig' with {'menu': footer_menu.get_items} %}
+    </nav>
+  {% endif %}
+</div>

@@ -6,39 +6,50 @@
 	</head>
 {% endblock %}
 
-	<body class="{{body_class}}" data-template="base.twig">
-		<header class="header" >
-			{% block header %}
-				<div class="wrapper">
-					<h1 class="hdr-logo" role="banner">
-						<a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
-					</h1>
-					<nav id="nav-main" class="nav-main" role="navigation">
-						{% include "menu.twig" with {'menu': menu.get_items} %}
-					</nav><!-- #nav -->
-				</div>
-			{% endblock %}
+	<body class="{{body_class}}">
+		<header class="main">
+			<section class="wrapper">
+				{% block header %}
+					<a class="logo" href="{{ site.url }}" rel="home">
+						{% if logo %}
+							<img src="{{ logo }}" alt="{{ site.name }}" />
+						{% else %}
+							{{ site.name }}
+						{% endif %}
+					</a>
+
+					{% if header_menu %}
+					<nav class="main" role="navigation">
+						{% include "menu.twig" with {'menu': header_menu.get_items} %}
+					</nav>
+					{% endif %}
+				{% endblock %}
+			</section>
 		</header>
 
-		<section id="content" role="main" class="content-wrapper">
+		<main class="content">
 			{% if title %}<h1>{{title}}</h1>{% endif %}
-			<div class="wrapper {{sidebar_class}}">
-				{% block content %}
-					Sorry, no content
-				{% endblock %}
-			</div>
+
+			<section class="wrapper {{sidebar_class}}">
+			{% block content %}
+				Sorry, no content
+			{% endblock %}
+			</section>
+
 			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
+			<aside class="layout-sidebar">
+				{{sidebar}}
+			</aside>
 			{% endif %}
-		</section>
+		</main>
 
 		{% block footer %}
-			<footer id="footer">
+		<footer class="main">
+			<section class="wrapper">
 				{% include 'footer.twig' %}
-			</footer>
-			{{ function('wp_footer') }}
+			</section>
+		</footer>
+		{{ function('wp_footer') }}
 		{% endblock %}
 	</body>
 </html>

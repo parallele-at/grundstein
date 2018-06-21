@@ -1,8 +1,14 @@
 {% if menu %}
 	<ul>
 	{% for item in menu %}
-		<li class="{{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		<li class="{{ item.current ? 'current' : '' }}">
+			<a target="{{ item.target }}" href="{{ item.link }}">
+				{% if item.thumbnail_id %}
+					<img src="{{ TimberImage(item.thumbnail_id).src }}" alt="{{ item.title }}" />
+				{% else %}
+					{{ item.title }}
+				{% endif %}
+			</a>
 			{% include "menu.twig" with {'menu': item.get_children} %}
 		</li>
 	{% endfor %}
