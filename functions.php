@@ -1,14 +1,6 @@
 <?php
 
 if ( ! class_exists( 'Timber' ) ) {
-	add_action( 'admin_notices', function() {
-		echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url( admin_url( 'plugins.php#timber' ) ) . '">' . esc_url( admin_url( 'plugins.php') ) . '</a></p></div>';
-	});
-
-	add_filter('template_include', function($template) {
-		return get_stylesheet_directory() . '/static/no-timber.html';
-	});
-
 	return;
 }
 
@@ -27,8 +19,8 @@ class StarterSite extends TimberSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 
 		add_action( 'after_setup_theme', function() {
-		  register_nav_menu( 'header', __( 'Primary Menu', 'avatami-com' ) );
-		  register_nav_menu( 'footer', __( 'Footer Menu', 'avatami-com' ) );
+		  register_nav_menu( 'header', __( 'Primary Menu', 'avatami' ) );
+		  register_nav_menu( 'footer', __( 'Footer Menu', 'avatami' ) );
 		});
 
 		add_theme_support( 'custom-logo', array(
@@ -38,6 +30,32 @@ class StarterSite extends TimberSite {
 			'flex-width'  => true,
 			'header-text' => array( 'site-title', 'site-description' ),
 		) );
+
+		add_action( 'customize_register', array( $this, 'customize_register') );
+
+		add_filter('less_vars', function () {
+			return array(
+				'header_background_color' => get_theme_mod('header_background_color', '#191919'),
+				'header_border_color' => get_theme_mod('header_border_color', '#ed1c24'),
+				'header_link_color' => get_theme_mod('header_link_color', '#fff'),
+				'header_link_color_hover' => get_theme_mod('header_link_color_hover', '#aaa'),
+				'header_text_color' => get_theme_mod('text_color', '#fff'),
+
+				'footer_background_color' => get_theme_mod('footer_background_color', '#191919'),
+				'footer_border_color' => get_theme_mod('footer_border_color', '#ed1c24'),
+				'footer_link_color' => get_theme_mod('footer_link_color', '#fff'),
+				'footer_link_color_hover' => get_theme_mod('footer_link_color_hover', '#aaa'),
+				'footer_text_color' => get_theme_mod('text_color', '#fff'),
+
+				'body_background_color' => get_theme_mod('body_background', '#3c3c3c'),
+				'border_color' => get_theme_mod('border_color', '#ed1c24'),
+				'accent_color' => get_theme_mod('accent_color', '#ed1c24'),
+				'subtle_color' => get_theme_mod('subtle_color', '#aaa'),
+				'link_color' => get_theme_mod('link_color', '#fff'),
+				'link_hover_color' => get_theme_mod('link_hover_color', '#aaa'),
+				'text_color' => get_theme_mod('text_color', '#fff'),
+			);
+		} );
 
 		parent::__construct();
 	}
@@ -49,6 +67,234 @@ class StarterSite extends TimberSite {
 	function register_taxonomies() {
 		//this is where you can register custom taxonomies
 	}
+
+	function customize_register( $wp_customize ) {
+    // Text color
+    $wp_customize->add_setting( 'text_color', array(
+      'default'   => '#fff',
+      'transport' => 'refresh',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Text color', 'avatami' ),
+    	) )
+	 	);
+
+    // Link color
+    $wp_customize->add_setting( 'link_color', array(
+      'default'   => '#fff',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Link color', 'avatami' ),
+    	) )
+		);
+
+		// Link Hover Color
+		$wp_customize->add_setting( 'link_hover_color', array(
+      'default'   => '#aaa',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'link_hover_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Link hover color', 'avatami' ),
+    	) )
+		);
+
+    // Accent color
+    $wp_customize->add_setting( 'accent_color', array(
+      'default'   => '#ed1c24',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Accent color', 'avatami' ),
+    	) )
+		);
+
+    // Subtle color
+    $wp_customize->add_setting( 'subtle_color', array(
+      'default'   => '#ed1c24',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'subtle_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Subtle color', 'avatami' ),
+    	) )
+		);
+
+		// Border color
+    $wp_customize->add_setting( 'border_color', array(
+      'default'   => '#ed1c24',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'border_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Border color', 'avatami' ),
+    	) )
+		);
+
+    // Header background
+    $wp_customize->add_setting( 'header_background_color', array(
+      'default'   => '#3c3c3c',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
+	      'section' => 'colors',
+	      'label'   => esc_html__( 'Header Background', 'avatami' ),
+	    ) )
+		);
+
+		// Header border
+    $wp_customize->add_setting( 'header_border_color', array(
+      'default'   => '#ed1c24',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'header_border_color', array(
+	      'section' => 'colors',
+	      'label'   => esc_html__( 'Header Border', 'avatami' ),
+	    ) )
+		);
+
+		// Header Link Color
+		$wp_customize->add_setting( 'header_link_color', array(
+      'default'   => '#fff',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'header_link_color', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Header Link color', 'avatami' ),
+    	) )
+		);
+
+		function add($wp_customize, $name, $default, $label) {
+			$wp_customize->add_setting( $name, array(
+				'default'   => $default,
+				'transport' => 'refresh',
+				'sanitize_callback' => 'sanitize_hex_color',
+			) );
+
+			$wp_customize->add_control(
+				new WP_Customize_Color_Control( $wp_customize, $name, array(
+					'section' => 'colors',
+					'label'   => $label,
+				) )
+			);
+		}
+
+		add($wp_customize, 'header_test_color', '#fff', 'Label');
+
+		// Header Link Hover Color
+		$wp_customize->add_setting( 'header_link_color_hover', array(
+      'default'   => '#aaa',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'header_link_color_hover', array(
+      	'section' => 'colors',
+      	'label'   => esc_html__( 'Header Link Hover Color', 'avatami' ),
+    	) )
+		);
+
+		// Body background
+    $wp_customize->add_setting( 'body_background_color', array(
+      'default'   => '#3c3c3c',
+      'transport' => 'refresh',
+      'sanitize_callback' => 'sanitize_hex_color',
+    ) );
+
+    $wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'body_background_color', array(
+	      'section' => 'colors',
+	      'label'   => esc_html__( 'Body Background', 'avatami' ),
+	    ) )
+		);
+
+		// Footer background
+		$wp_customize->add_setting( 'footer_background_color', array(
+			'default'   => '#3c3c3c',
+			'transport' => 'refresh',
+			'sanitize_callback' => 'sanitize_hex_color',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'footer_background_color', array(
+				'section' => 'colors',
+				'label'   => esc_html__( 'Footer Background', 'avatami' ),
+			) )
+		);
+
+		// Header border
+		$wp_customize->add_setting( 'footer_border_color', array(
+			'default'   => '#ed1c24',
+			'transport' => 'refresh',
+			'sanitize_callback' => 'sanitize_hex_color',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'footer_border_color', array(
+				'section' => 'colors',
+				'label'   => esc_html__( 'Footer Border', 'avatami' ),
+			) )
+		);
+
+		// Header Link Color
+		$wp_customize->add_setting( 'footer_link_color', array(
+			'default'   => '#fff',
+			'transport' => 'refresh',
+			'sanitize_callback' => 'sanitize_hex_color',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'footer_link_color', array(
+				'section' => 'colors',
+				'label'   => esc_html__( 'Footer Link color', 'avatami' ),
+			) )
+		);
+
+		// Header Link Hover Color
+		$wp_customize->add_setting( 'footer_link_color_hover', array(
+			'default'   => '#aaa',
+			'transport' => 'refresh',
+			'sanitize_callback' => 'sanitize_hex_color',
+		) );
+
+		$wp_customize->add_control(
+			new WP_Customize_Color_Control( $wp_customize, 'footer_link_color_hover', array(
+				'section' => 'colors',
+				'label'   => esc_html__( 'Footer Link Hover Color', 'avatami' ),
+			) )
+		);
+  }
 
 	function add_to_context( $context ) {
 		$context['header_menu'] = new TimberMenu('header');
@@ -67,15 +313,14 @@ class StarterSite extends TimberSite {
 		return $context;
 	}
 
-	// function myfoo( $text ) {
-	// 	$text .= ' bar!';
-	// 	return $text;
-	// }
+	function filter_substr( $text, $start, $end ) {
+		return substr($text, $start, $end);
+	}
 
 	function add_to_twig( $twig ) {
 		/* this is where you can add your own functions to twig */
 		// $twig->addExtension( new Twig_Extension_StringLoader() );
-		// $twig->addFilter('myfoo', new Twig_SimpleFilter('myfoo', array($this, 'myfoo')));
+		$twig->addFilter('substr', new Twig_SimpleFilter('substr', array($this, 'filter_substr')));
 		return $twig;
 	}
 
