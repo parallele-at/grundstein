@@ -13,6 +13,13 @@ if ( ! class_exists( 'Timber' ) ) {
 
 Timber::$dirname = array('templates', 'views');
 
+function add_customizer_section($wp_customize, $name, $label, $priority = 30) {
+	$wp_customize->add_section( $name , array(
+    'title'      => __($label, 'magic-grundstein'),
+    'priority'   => $priority,
+	) );
+}
+
 function add_customizer($wp_customize, $section, $name, $default, $label) {
 	$wp_customize->add_setting( $name, array(
 		'default'   => $default,
@@ -91,6 +98,9 @@ class Magic_Grundstein extends TimberSite {
 	}
 
 	function customize_register( $wp_customize ) {
+		add_customizer_section( $wp_customize, 'header', 'Header' );
+		add_customizer_section( $wp_customize, 'footer', 'Footer' );
+
 		add_customizer($wp_customize, 'colors', 'text_color', '#fff', 'Text');
 		add_customizer($wp_customize, 'colors', 'link_color', '#fff', 'Link');
 		add_customizer($wp_customize, 'colors', 'link_hover_color', '#aaa', 'Link hover');
@@ -99,17 +109,17 @@ class Magic_Grundstein extends TimberSite {
 
 		add_customizer($wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders');
 
-		add_customizer($wp_customize, 'colors', 'header_background_color', '#191919', 'Header Background');
-		add_customizer($wp_customize, 'colors', 'header_border_color', '#ed1c24', 'Header Border');
-		add_customizer($wp_customize, 'colors', 'header_link_color', '#fff', 'Header Links');
-		add_customizer($wp_customize, 'colors', 'header_link_hover_color', '#aaa', 'Header Links Hover');
+		add_customizer($wp_customize, 'header', 'header_background_color', '#191919', 'Header Background');
+		add_customizer($wp_customize, 'header', 'header_border_color', '#ed1c24', 'Header Border');
+		add_customizer($wp_customize, 'header', 'header_link_color', '#fff', 'Header Links');
+		add_customizer($wp_customize, 'header', 'header_link_hover_color', '#aaa', 'Header Links Hover');
 
 		add_customizer($wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background');
 
-		add_customizer($wp_customize, 'colors', 'footer_background_color', '#191919', 'Footer Background');
-		add_customizer($wp_customize, 'colors', 'footer_border_color', '#ed1c24', 'Footer Border');
-		add_customizer($wp_customize, 'colors', 'footer_link_color', '#fff', 'Footer Links');
-		add_customizer($wp_customize, 'colors', 'footer_link_hover_color', '#aaa', 'Footer Links Hover');
+		add_customizer($wp_customize, 'footer', 'footer_background_color', '#191919', 'Footer Background');
+		add_customizer($wp_customize, 'footer', 'footer_border_color', '#ed1c24', 'Footer Border');
+		add_customizer($wp_customize, 'footer', 'footer_link_color', '#fff', 'Footer Links');
+		add_customizer($wp_customize, 'footer', 'footer_link_hover_color', '#aaa', 'Footer Links Hover');
   }
 
 	function add_to_context( $context ) {
