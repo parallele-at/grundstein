@@ -7,9 +7,8 @@
  * for the support of your plugin or theme. Please contact the plugin
  * or theme author for support.
  *
- * @package   TGM-Plugin-Activation
- * @version   2.6.1 for parent theme grundstein for publication on WordPress.org
- * @link      http://tgmpluginactivation.com/
+ * @package   Magic-Grundstein
+ * @version   0.0.1
  * @author    Thomas Griffin, Gary Jones, Juliette Reinders Folmer
  * @copyright Copyright (c) 2011, Thomas Griffin
  * @license   GPL-2.0+
