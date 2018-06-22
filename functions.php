@@ -1,12 +1,34 @@
 <?php
 
+/**
+ * @package  Magic-Grundstein
+ * @since   0.0.1
+ */
+
+require_once get_template_directory() . '/lib/plugin-activation/requirements.php';
+
 if ( ! class_exists( 'Timber' ) ) {
 	return;
 }
 
 Timber::$dirname = array('templates', 'views');
 
-class StarterSite extends TimberSite {
+function add_customizer($wp_customize, $section, $name, $default, $label) {
+	$wp_customize->add_setting( $name, array(
+		'default'   => $default,
+		'transport' => 'refresh',
+		'sanitize_callback' => 'sanitize_hex_color',
+	) );
+
+	$wp_customize->add_control(
+		new WP_Customize_Color_Control( $wp_customize, $name, array(
+			'section' => $section,
+			'label'   => esc_html__($label, 'magic-grundstein'),
+		) )
+	);
+}
+
+class Magic_Grundstein extends TimberSite {
 
 	function __construct() {
 		add_theme_support( 'post-formats' );
@@ -19,8 +41,8 @@ class StarterSite extends TimberSite {
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 
 		add_action( 'after_setup_theme', function() {
-		  register_nav_menu( 'header', __( 'Primary Menu', 'avatami' ) );
-		  register_nav_menu( 'footer', __( 'Footer Menu', 'avatami' ) );
+		  register_nav_menu( 'header', __( 'Primary Menu', 'magic-grundstein' ) );
+		  register_nav_menu( 'footer', __( 'Footer Menu', 'magic-grundstein' ) );
 		});
 
 		add_theme_support( 'custom-logo', array(
@@ -69,231 +91,25 @@ class StarterSite extends TimberSite {
 	}
 
 	function customize_register( $wp_customize ) {
-    // Text color
-    $wp_customize->add_setting( 'text_color', array(
-      'default'   => '#fff',
-      'transport' => 'refresh',
-    ) );
+		add_customizer($wp_customize, 'colors', 'text_color', '#fff', 'Text');
+		add_customizer($wp_customize, 'colors', 'link_color', '#fff', 'Link');
+		add_customizer($wp_customize, 'colors', 'link_hover_color', '#aaa', 'Link hover');
+		add_customizer($wp_customize, 'colors', 'accent_color', '#ed1c24', 'Accents');
+		add_customizer($wp_customize, 'colors', 'subtle_color', '#aaa', 'Subtle');
 
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'text_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Text color', 'avatami' ),
-    	) )
-	 	);
+		add_customizer($wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders');
 
-    // Link color
-    $wp_customize->add_setting( 'link_color', array(
-      'default'   => '#fff',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
+		add_customizer($wp_customize, 'colors', 'header_background_color', '#191919', 'Header Background');
+		add_customizer($wp_customize, 'colors', 'header_border_color', '#ed1c24', 'Header Border');
+		add_customizer($wp_customize, 'colors', 'header_link_color', '#fff', 'Header Links');
+		add_customizer($wp_customize, 'colors', 'header_link_hover_color', '#aaa', 'Header Links Hover');
 
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'link_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Link color', 'avatami' ),
-    	) )
-		);
+		add_customizer($wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background');
 
-		// Link Hover Color
-		$wp_customize->add_setting( 'link_hover_color', array(
-      'default'   => '#aaa',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'link_hover_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Link hover color', 'avatami' ),
-    	) )
-		);
-
-    // Accent color
-    $wp_customize->add_setting( 'accent_color', array(
-      'default'   => '#ed1c24',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'accent_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Accent color', 'avatami' ),
-    	) )
-		);
-
-    // Subtle color
-    $wp_customize->add_setting( 'subtle_color', array(
-      'default'   => '#ed1c24',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'subtle_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Subtle color', 'avatami' ),
-    	) )
-		);
-
-		// Border color
-    $wp_customize->add_setting( 'border_color', array(
-      'default'   => '#ed1c24',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'border_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Border color', 'avatami' ),
-    	) )
-		);
-
-    // Header background
-    $wp_customize->add_setting( 'header_background_color', array(
-      'default'   => '#3c3c3c',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'header_background_color', array(
-	      'section' => 'colors',
-	      'label'   => esc_html__( 'Header Background', 'avatami' ),
-	    ) )
-		);
-
-		// Header border
-    $wp_customize->add_setting( 'header_border_color', array(
-      'default'   => '#ed1c24',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'header_border_color', array(
-	      'section' => 'colors',
-	      'label'   => esc_html__( 'Header Border', 'avatami' ),
-	    ) )
-		);
-
-		// Header Link Color
-		$wp_customize->add_setting( 'header_link_color', array(
-      'default'   => '#fff',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'header_link_color', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Header Link color', 'avatami' ),
-    	) )
-		);
-
-		function add($wp_customize, $name, $default, $label) {
-			$wp_customize->add_setting( $name, array(
-				'default'   => $default,
-				'transport' => 'refresh',
-				'sanitize_callback' => 'sanitize_hex_color',
-			) );
-
-			$wp_customize->add_control(
-				new WP_Customize_Color_Control( $wp_customize, $name, array(
-					'section' => 'colors',
-					'label'   => $label,
-				) )
-			);
-		}
-
-		add($wp_customize, 'header_test_color', '#fff', 'Label');
-
-		// Header Link Hover Color
-		$wp_customize->add_setting( 'header_link_color_hover', array(
-      'default'   => '#aaa',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'header_link_color_hover', array(
-      	'section' => 'colors',
-      	'label'   => esc_html__( 'Header Link Hover Color', 'avatami' ),
-    	) )
-		);
-
-		// Body background
-    $wp_customize->add_setting( 'body_background_color', array(
-      'default'   => '#3c3c3c',
-      'transport' => 'refresh',
-      'sanitize_callback' => 'sanitize_hex_color',
-    ) );
-
-    $wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'body_background_color', array(
-	      'section' => 'colors',
-	      'label'   => esc_html__( 'Body Background', 'avatami' ),
-	    ) )
-		);
-
-		// Footer background
-		$wp_customize->add_setting( 'footer_background_color', array(
-			'default'   => '#3c3c3c',
-			'transport' => 'refresh',
-			'sanitize_callback' => 'sanitize_hex_color',
-		) );
-
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'footer_background_color', array(
-				'section' => 'colors',
-				'label'   => esc_html__( 'Footer Background', 'avatami' ),
-			) )
-		);
-
-		// Header border
-		$wp_customize->add_setting( 'footer_border_color', array(
-			'default'   => '#ed1c24',
-			'transport' => 'refresh',
-			'sanitize_callback' => 'sanitize_hex_color',
-		) );
-
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'footer_border_color', array(
-				'section' => 'colors',
-				'label'   => esc_html__( 'Footer Border', 'avatami' ),
-			) )
-		);
-
-		// Header Link Color
-		$wp_customize->add_setting( 'footer_link_color', array(
-			'default'   => '#fff',
-			'transport' => 'refresh',
-			'sanitize_callback' => 'sanitize_hex_color',
-		) );
-
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'footer_link_color', array(
-				'section' => 'colors',
-				'label'   => esc_html__( 'Footer Link color', 'avatami' ),
-			) )
-		);
-
-		// Header Link Hover Color
-		$wp_customize->add_setting( 'footer_link_color_hover', array(
-			'default'   => '#aaa',
-			'transport' => 'refresh',
-			'sanitize_callback' => 'sanitize_hex_color',
-		) );
-
-		$wp_customize->add_control(
-			new WP_Customize_Color_Control( $wp_customize, 'footer_link_color_hover', array(
-				'section' => 'colors',
-				'label'   => esc_html__( 'Footer Link Hover Color', 'avatami' ),
-			) )
-		);
+		add_customizer($wp_customize, 'colors', 'footer_background_color', '#191919', 'Footer Background');
+		add_customizer($wp_customize, 'colors', 'footer_border_color', '#ed1c24', 'Footer Border');
+		add_customizer($wp_customize, 'colors', 'footer_link_color', '#fff', 'Footer Links');
+		add_customizer($wp_customize, 'colors', 'footer_link_hover_color', '#aaa', 'Footer Links Hover');
   }
 
 	function add_to_context( $context ) {
@@ -310,6 +126,7 @@ class StarterSite extends TimberSite {
 		$context['is_admin'] = current_user_can( 'manage_options' );
 
 		$context['site'] = $this;
+
 		return $context;
 	}
 
@@ -326,4 +143,4 @@ class StarterSite extends TimberSite {
 
 }
 
-new StarterSite();
+new Magic_Grundstein();
