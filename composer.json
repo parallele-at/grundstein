@@ -24,6 +24,11 @@
   	}
 	},
   "require": {
-	  "wpackagist-plugin/timber-library": "0.22.*"
+    "wpackagist-plugin/w3-total-cache": "^0.9.5.1",
+    "wpackagist-plugin/debug-bar": "^0.8.4",
+    "wpackagist-plugin/debug-bar-timber": "^0.3.0",
+    "wpackagist-plugin/if-menu": "^0.10",
+    "wpackagist-plugin/timber-library": "^1.7",
+    "wpackagist-plugin/wp-less": "^1.8.0"
   }
 }

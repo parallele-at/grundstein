@@ -91,9 +91,12 @@ img {
 
 a {
 	color: @link_color;
+	text-decoration: none;
+	box-shadow: inset 0 -1px 0 0 @link_hover_color;
 
 	&:hover {
 		color: @link_hover_color;
+		box-shadow: inset 0 -1px 0 0 @link_color;
 	}
 }
 
@@ -108,6 +111,7 @@ header.main {
 		margin: 24% auto 15%;
 		position: relative;
 		width: 90%;
+		box-shadow: none;
 	}
 }
 
@@ -181,7 +185,7 @@ footer.main {
 		}
 
 		.logo {
-			padding: 10px;
+			padding: 10px 0;
 			float: left;
 			max-height: 100%;
 			max-width: 30%;
