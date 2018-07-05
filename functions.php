@@ -46,8 +46,6 @@ class Magic_Grundstein extends TimberSite {
 
 		add_action( 'customize_register', 'mgs_customize_register' );
 
-		add_filter( 'less_vars', 'mgs_customize_less_vars');
-
 		parent::__construct();
 	}
 
