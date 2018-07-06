@@ -1,0 +1,111 @@
+header.main {
+	display: inline-block;
+	left: 0;
+	position: relative;
+	top: 0;
+	width: 100%;
+
+	.logo {
+		box-shadow: none;
+		width: 60%;
+		display: block;
+		margin: 3em auto;
+	}
+}
+
+nav {
+	margin: 0 0 10%;
+	text-align: center;
+	width: 100%;
+
+	ul li {
+  	margin: 1em 0;
+
+		a {
+			text-decoration: none;
+		}
+
+		&.current a,
+		a:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+main {
+	padding-bottom: 10em;
+}
+
+footer.main {
+	bottom: 0;
+	display: inline-block;
+	font-size: 0.8em;
+	left: 0;
+	margin: 2em 0 0;
+	padding: 0.5em;
+	position: fixed;
+	text-align: center;
+	width: 100%;
+
+	nav {
+		font-size: 1em;
+		margin: 0.5em 0 0;
+	}
+
+	.copy {
+		display: inline-block;
+
+	 	span {
+			color: @subtle_color;
+		}
+	}
+}
+
+.wrapper {
+	max-width: 1000px;
+	width: 90%;
+	margin: 0 auto;
+}
+
+@media screen and (min-width: 700px) {
+	header.main {
+		display: inline-block;
+
+		.logo,
+  	nav {
+			width: auto;
+			margin: 0;
+		}
+
+		.logo {
+			padding: 10px 0;
+			float: left;
+			max-height: 100%;
+			max-width: 30%;
+			box-sizing: border-box;
+		}
+
+		nav {
+			text-align: left;
+			margin: 0.5em 0;
+			float: right;
+		}
+	}
+
+	footer.main {
+		nav {
+			width: auto;
+			margin: 0;
+			float: left;
+		}
+
+		.copy span {
+			float: left;
+		}
+	}
+
+	nav ul li {
+		float: left;
+		margin: 0 0 0 0.5em;
+	}
+}
