@@ -67,6 +67,7 @@ function mgs_customize_register( $wp_customize ) {
 	mgs_add_customizer($wp_customize, 'colors', 'link_color', '#fff', 'Link', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'link_hover_color', '#aaa', 'Link hover', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'accent_color', '#ed1c24', 'Accents', 'WP_Customize_Color_Control');
+	mgs_add_customizer($wp_customize, 'colors', 'contrast_color', '#00ff00', 'Contrast', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'subtle_color', '#aaa', 'Subtle', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background', 'WP_Customize_Color_Control');
@@ -86,27 +87,35 @@ function mgs_customize_register( $wp_customize ) {
 if (class_exists('WPLessPlugin')) {
 	$less = WPLessPlugin::getInstance();
 
-	$less->setVariables(array(
-    'layout_id' => get_theme_mod('layout_id', 'classic'),
+  $color_names = array (
+    'layout_id' => 'classic',
 
-    'header_background_color' => get_theme_mod('header_background_color', '#191919'),
-    'header_border_color' => get_theme_mod('header_border_color', '#ed1c24'),
-    'header_link_color' => get_theme_mod('header_link_color', '#fff'),
-    'header_link_color_hover' => get_theme_mod('header_link_color_hover', '#aaa'),
-    'header_text_color' => get_theme_mod('text_color', '#fff'),
+    'header_background_color' => '#191919',
+    'header_border_color' => '#ed1c24',
+    'header_link_color' => '#fff',
+    'header_link_color_hover' => '#aaa',
+    'header_text_color' => '#fff',
 
-    'footer_background_color' => get_theme_mod('footer_background_color', '#191919'),
-    'footer_border_color' => get_theme_mod('footer_border_color', '#ed1c24'),
-    'footer_link_color' => get_theme_mod('footer_link_color', '#fff'),
-    'footer_link_color_hover' => get_theme_mod('footer_link_color_hover', '#aaa'),
-    'footer_text_color' => get_theme_mod('text_color', '#fff'),
+    'footer_background_color' => '#191919',
+    'footer_border_color' => '#ed1c24',
+    'footer_link_color' => '#fff',
+    'footer_link_color_hover' => '#aaa',
+    'footer_text_color' => '#fff',
 
-    'body_background_color' => get_theme_mod('body_background', '#3c3c3c'),
-    'border_color' => get_theme_mod('border_color', '#ed1c24'),
-    'accent_color' => get_theme_mod('accent_color', '#ed1c24'),
-    'subtle_color' => get_theme_mod('subtle_color', '#aaa'),
-    'link_color' => get_theme_mod('link_color', '#fff'),
-    'link_hover_color' => get_theme_mod('link_hover_color', '#aaa'),
-    'text_color' => get_theme_mod('text_color', '#fff'),
-  ));
+    'body_background_color' => '#3c3c3c',
+    'border_color' => '#ed1c24',
+    'accent_color' => '#ed1c24',
+    'contrast_color' => '#00ff00',
+    'subtle_color' => '#aaa',
+    'link_color' => '#fff',
+    'link_hover_color' => '#aaa',
+    'text_color' => '#fff',
+  );
+
+  $colors = [];
+  foreach ( $color_names as $color_name => $color_value ) {
+    $colors[$color_name] = get_theme_mod( $color_name, $color_value );
+  }
+
+	$less->setVariables( $colors );
 }
