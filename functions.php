@@ -8,7 +8,6 @@
 require_once( get_template_directory() . '/includes/plugin-activation/requirements.php' );
 require_once( get_template_directory() . '/includes/customizer/customizer.php' );
 require_once( get_template_directory() . '/includes/password-hashing.php' );
-require_once( get_template_directory() . '/includes/post-form-login.php' );
 
 require_once(__DIR__ . '/vendor/autoload.php');
 
