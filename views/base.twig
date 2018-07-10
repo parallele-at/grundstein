@@ -47,9 +47,9 @@
 		<footer class="main">
 			<section class="wrapper">
 				{% include 'footer.twig' %}
+				{{ function('wp_footer') }}
 			</section>
 		</footer>
-		{{ function('wp_footer') }}
 		{% endblock %}
 	</body>
 </html>
