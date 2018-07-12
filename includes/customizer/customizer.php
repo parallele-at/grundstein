@@ -55,9 +55,21 @@ function mgs_customize_register( $wp_customize ) {
   $layout_options = array(
     'type' => 'radio',
     'choices' => array(
-      'classic' => 'Classic',
-      '2-column' => '2 Column',
-      '3-column' => '3 Column',
+      '1' => 'Classic',
+      '2' => '2 Column',
+      '3' => '3 Column',
+    ),
+  );
+
+  $menu_layout_settings_options = array(
+    'sanitize' => 'mgs_slug_sanitize_radio',
+    'default' => '1',
+  );
+  $menu_layout_options = array(
+    'type' => 'radio',
+    'choices' => array(
+      '1' => 'Classic',
+      '2' => 'Centered',
     ),
   );
 
@@ -74,6 +86,7 @@ function mgs_customize_register( $wp_customize ) {
 
 	mgs_add_customizer($wp_customize, 'header', 'header_background_color', '#191919', 'Header Background', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'header', 'header_border_color', '#ed1c24', 'Header Border', 'WP_Customize_Color_Control');
+  mgs_add_customizer($wp_customize, 'header', 'menu_layout_id', $menu_layout_settings_options, 'Menu Layout', 'WP_Customize_Control', $menu_layout_options );
 	mgs_add_customizer($wp_customize, 'header', 'header_link_color', '#fff', 'Header Links', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'header', 'header_link_hover_color', '#aaa', 'Header Links Hover', 'WP_Customize_Color_Control');
 
@@ -87,8 +100,9 @@ function mgs_customize_register( $wp_customize ) {
 if (class_exists('WPLessPlugin')) {
 	$less = WPLessPlugin::getInstance();
 
-  $color_names = array (
-    'layout_id' => 'classic',
+  $attr_names = array (
+    'layout_id' => '1',
+    'menu_layout_id' => '1',
 
     'header_background_color' => '#191919',
     'header_border_color' => '#ed1c24',
@@ -113,8 +127,8 @@ if (class_exists('WPLessPlugin')) {
   );
 
   $colors = [];
-  foreach ( $color_names as $color_name => $color_value ) {
-    $colors[$color_name] = get_theme_mod( $color_name, $color_value );
+  foreach ( $attr_names as $attr_name => $attr_value ) {
+    $colors[$attr_name] = get_theme_mod( $attr_name, $attr_value );
   }
 
 	$less->setVariables( $colors );
