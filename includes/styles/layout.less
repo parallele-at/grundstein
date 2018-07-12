@@ -4,32 +4,6 @@ header.main {
 	position: relative;
 	top: 0;
 	width: 100%;
-
-	.logo {
-		box-shadow: none;
-		width: 60%;
-		display: block;
-		margin: 3em auto;
-	}
-}
-
-nav {
-	margin: 0 0 10%;
-	text-align: center;
-	width: 100%;
-
-	ul li {
-  	margin: 1em 0;
-
-		a {
-			text-decoration: none;
-		}
-
-		&.current a,
-		a:hover {
-			text-decoration: underline;
-		}
-	}
 }
 
 main {
@@ -61,11 +35,6 @@ footer.main {
 	text-align: center;
 	width: 100%;
 
-	nav {
-		font-size: 1em;
-		margin: 0.5em 0 0;
-	}
-
 	.copy {
 		display: inline-block;
 
@@ -85,41 +54,11 @@ footer.main {
 	header.main {
 		display: inline-block;
 
-		.logo,
-  	nav {
-			width: auto;
-			margin: 0;
-		}
-
 		.logo {
 			padding: 10px 0;
-			float: left;
 			max-height: 100%;
 			max-width: 30%;
 			box-sizing: border-box;
 		}
-
-		nav {
-			text-align: left;
-			margin: 0.5em 0;
-			float: right;
-		}
-	}
-
-	footer.main {
-		nav {
-			width: auto;
-			margin: 0;
-			float: left;
-		}
-
-		.copy span {
-			float: left;
-		}
-	}
-
-	nav ul li {
-		float: left;
-		margin: 0 0 0 0.5em;
 	}
 }
