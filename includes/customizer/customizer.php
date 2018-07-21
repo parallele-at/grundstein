@@ -83,6 +83,9 @@ function mgs_customize_register( $wp_customize ) {
 	mgs_add_customizer($wp_customize, 'colors', 'subtle_color', '#aaa', 'Subtle', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background', 'WP_Customize_Color_Control');
+	mgs_add_customizer($wp_customize, 'colors', 'error_color', '#ed1c24', 'Error Color', 'WP_Customize_Color_Control');
+	mgs_add_customizer($wp_customize, 'colors', 'warning_color', '#ffff22', 'Warning Color', 'WP_Customize_Color_Control');
+	mgs_add_customizer($wp_customize, 'colors', 'success_color', '#00ff00', 'Success Color', 'WP_Customize_Color_Control');
 
 	mgs_add_customizer($wp_customize, 'header', 'header_background_color', '#191919', 'Header Background', 'WP_Customize_Color_Control');
 	mgs_add_customizer($wp_customize, 'header', 'header_border_color', '#ed1c24', 'Header Border', 'WP_Customize_Color_Control');
@@ -124,6 +127,10 @@ if (class_exists('WPLessPlugin')) {
     'link_color' => '#fff',
     'link_hover_color' => '#aaa',
     'text_color' => '#fff',
+
+    'error_color' => '#ed1c24',
+    'warning_color' => '#ffff22',
+    'success_color' => '#00ff00',
   );
 
   $colors = [];
