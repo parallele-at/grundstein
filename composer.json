@@ -4,10 +4,10 @@
   "type":"wordpress-theme",
   "minimum-stability" : "stable",
   "authors": [
-      {
-          "name": "jarednova",
-          "email": "jared@upstatement.com"
-      }
+    {
+      "email": "jared@upstatement.com",
+      "name": "jarednova"
+    }  
   ],
   "repositories": [
     {
@@ -15,20 +15,10 @@
       "url": "https://wpackagist.org"
     }
   ],
-  "extra": {
-  	"installer-paths": {
-      "../../plugins/{$name}/": [
-        "wpackagist-plugin/*",
-        "type:wordpress-plugin"
-      ]
-  	}
-	},
   "require": {
-    "wpackagist-plugin/w3-total-cache": "^0.9.5.1",
-    "wpackagist-plugin/debug-bar": "^0.8.4",
-    "wpackagist-plugin/debug-bar-timber": "^0.3.0",
-    "wpackagist-plugin/if-menu": "^0.10",
-    "wpackagist-plugin/timber-library": "^1.7",
-    "wpackagist-plugin/wp-less": "^1.8.0"
+	  "timber/timber": "1.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "5.7.16|6.*"
   }
 }
