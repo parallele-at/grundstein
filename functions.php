@@ -3,7 +3,7 @@
  * Timber starter-theme
  * https://github.com/timber/starter-theme
  *
- * @package Magic-Grundstein
+ * @package Grundstein
  * @since  0.0.1
  */
 
@@ -53,7 +53,7 @@ Timber::$dirname = array( 'templates', 'views' );
  * By default, Timber does NOT autoescape values. Want to enable Twig's autoescape?
  * No prob! Just set this value to true
  */
-Timber::$autoescape = true;
+Timber::$autoescape = false;
 
 
 /**
@@ -68,6 +68,9 @@ class Magie_Grundstein extends Timber\Site {
 		add_filter( 'timber/twig', array( $this, 'add_to_twig' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+
+		add_action( 'customize_register', 'mgs_customize_register' );
+
 		parent::__construct();
 	}
 	/** This is where you can register custom post types. */
@@ -153,7 +156,7 @@ class Magie_Grundstein extends Timber\Site {
 		add_theme_support( 'menus' );
 	}
 
-	/** This Would return 'foo bar!'.
+	/** Returns a substring of a string
 		*
 		* @param string $text string to get substring from
 		* @param int $start value to start substring at
