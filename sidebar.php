@@ -2,8 +2,8 @@
 /**
  * The Template for the sidebar containing the main widget area
  *
- * @package  Magic-Grundstein
- * @since   0.0.1
+ * @package  WordPress
+ * @subpackage  Timber
  */
 
 Timber::render( array( 'sidebar.twig' ), $data );
