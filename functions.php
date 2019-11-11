@@ -28,7 +28,6 @@ require_once get_template_directory() . '/includes/class-magic-grundstein.php';
  * If not, it gives an error message to help direct developers on where to activate
  */
 if ( ! class_exists( 'Timber' ) ) {
-
 	add_action(
 		'admin_notices',
 		function() {
@@ -42,6 +41,7 @@ if ( ! class_exists( 'Timber' ) ) {
 			return get_stylesheet_directory() . '/static/no-timber.html';
 		}
 	);
+
 	return;
 }
 
