@@ -1,25 +1,65 @@
 <?php
+/**
+ * Add customizer custom fields for this theme
+ *
+ * @package grundstein
+ * @since 0.0.1
+ */
 
-function mgs_slug_sanitize_radio( $input, $setting ) {
-	// input must be a slug: lowercase alphanumeric characters, dashes and underscores are allowed only
+/**
+ * Sanitize radio input values
+ *
+ * @since 0.0.1
+ *
+ * @param string $input string with input name.
+ * @param array  $setting value of the input.
+ *
+ * @return string either the input value or the input default value
+ */
+function mgs_slug_sanitize_radio( string $input, array $setting ) {
+	// input must be a slug: only lowercase alphanumeric characters, dashes and underscores are allowed.
 	$input = sanitize_key( $input );
-	// get the list of possible radio box options
+	// get the list of possible radio box options.
 	$choices = $setting->manager->get_control( $setting->id )->choices;
-	// return input if valid or return default option
+	// return input if valid or return default option.
 	return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
 }
 
+/**
+ * Add a section to the customizer
+ *
+ * @since 0.0.1
+ *
+ * @param array  $wp_customize WordPress customizer instance.
+ * @param string $name of the input.
+ * @param string $label info label.
+ * @param int    $priority order this input appears in the list, higher = lower.
+ */
 function mgs_add_customizer_section( $wp_customize, $name, $label, $priority = 30 ) {
 	$wp_customize->add_section(
 		$name,
 		array(
-			'title'    => esc_html__( $label, 'magic-grundstein' ),
+			'title'    => esc_html_raw( $label ),
 			'priority' => $priority,
 		)
 	);
 }
 
-function mgs_add_customizer( $wp_customize, $section, $name, $default, $label, $control, $opts = [], $sanitize = 'sanitize_hex_color' ) {
+/**
+ * Add a section to the customizer
+ *
+ * @since 0.0.1
+ *
+ * @param array  $wp_customize WordPress customizer instance.
+ * @param string $section to put the input in.
+ * @param string $name of the input.
+ * @param any    $default value of this input.
+ * @param string $label info label.
+ * @param array  $control Class to inherit this control from.
+ * @param array  $opts options for this section.
+ * @param string $sanitize type of sanitizer to run against the input.
+ */
+function mgs_add_customizer( array $wp_customize, string $section, string $name, $default, string $label, $control, array $opts = [], string $sanitize = 'sanitize_hex_color' ) {
 	$setting_options = array(
 		'transport' => 'refresh',
 	);
@@ -39,7 +79,7 @@ function mgs_add_customizer( $wp_customize, $section, $name, $default, $label, $
 
 	$def_opts = array(
 		'section'  => $section,
-		'label'    => esc_html__( $label, 'magic-grundstein' ),
+		'label'    => esc_html_raw( $label ),
 		'settings' => $name,
 	);
 
@@ -48,7 +88,14 @@ function mgs_add_customizer( $wp_customize, $section, $name, $default, $label, $
 	$wp_customize->add_control( new $control( $wp_customize, $name, $options ) );
 }
 
-function mgs_customize_register( $wp_customize ) {
+/**
+ * Add a section to the customizer
+ *
+ * @since 0.0.1
+ *
+ * @param array $wp_customize WordPress customizer instance.
+ */
+function mgs_customize_register( array $wp_customize ) {
 	mgs_add_customizer_section( $wp_customize, 'layout', 'Layout', 20 );
 	mgs_add_customizer_section( $wp_customize, 'header', 'Header' );
 	mgs_add_customizer_section( $wp_customize, 'footer', 'Footer', 40 );
@@ -103,46 +150,4 @@ function mgs_customize_register( $wp_customize ) {
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_color', '#ed1c24', 'Footer Border', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_color', '#fff', 'Footer Links', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_hover_color', '#aaa', 'Footer Links Hover', 'WP_Customize_Color_Control' );
-}
-
-
-if ( class_exists( 'WPLessPlugin' ) ) {
-	$less = WPLessPlugin::getInstance();
-
-	$attr_names = array(
-		'layout_id'               => '1',
-		'menu_layout_id'          => '1',
-
-		'header_background_color' => '#191919',
-		'header_border_color'     => '#ed1c24',
-		'header_link_color'       => '#fff',
-		'header_link_color_hover' => '#aaa',
-		'header_text_color'       => '#fff',
-
-		'footer_background_color' => '#191919',
-		'footer_border_color'     => '#ed1c24',
-		'footer_link_color'       => '#fff',
-		'footer_link_color_hover' => '#aaa',
-		'footer_text_color'       => '#fff',
-
-		'body_background_color'   => '#3c3c3c',
-		'border_color'            => '#ed1c24',
-		'accent_color'            => '#ed1c24',
-		'contrast_color'          => '#00ff00',
-		'subtle_color'            => '#aaa',
-		'link_color'              => '#fff',
-		'link_hover_color'        => '#aaa',
-		'text_color'              => '#fff',
-
-		'error_color'             => '#ed1c24',
-		'warning_color'           => '#ffff22',
-		'success_color'           => '#00ff00',
-	);
-
-	$colors = [];
-	foreach ( $attr_names as $attr_name => $attr_value ) {
-		$colors[ $attr_name ] = get_theme_mod( $attr_name, $attr_value );
-	}
-
-	$less->setVariables( $colors );
 }
