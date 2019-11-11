@@ -1,4 +1,10 @@
 <?php
+/**
+ * Test manually loading the bootstrap.php
+ *
+ * @package grundstein
+ * @since 0.0.1
+ */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 if ( ! $_tests_dir ) {
@@ -7,6 +13,11 @@ if ( ! $_tests_dir ) {
 
 require_once $_tests_dir . '/includes/functions.php';
 
+/**
+ * Load timber plugin manually.
+ *
+ * @since 0.0.1
+ */
 function _manually_load_plugin() {
 	$plugins_dir = dirname( __FILE__ ) . '/../../../plugins';
 	$timber      = $plugins_dir . '/timber/timber.php';
