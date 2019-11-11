@@ -8,7 +8,8 @@
 
 /**
  * We're going to configure our theme inside of a subclass of Timber\Site
- * You can move this to its own file and include here via php's include("MySite.php")
+ *
+ * @since 0.0.1
  */
 class Magic_Grundstein extends Timber\Site {
 	/** Add timber support. */
@@ -23,16 +24,19 @@ class Magic_Grundstein extends Timber\Site {
 
 		parent::__construct();
 	}
+
 	/** This is where you can register custom post types. */
 	public function register_post_types() {
 
 	}
+
 	/** This is where you can register custom taxonomies. */
 	public function register_taxonomies() {
 
 	}
 
-	/** This is where you add some context
+	/**
+	 * This is where you add some context
 	 *
 	 * @param string $context context['this'] Being the Twig's {{ this }}.
 	 */
@@ -52,6 +56,11 @@ class Magic_Grundstein extends Timber\Site {
 		return $context;
 	}
 
+	/**
+	 * Add theme support hook
+	 *
+	 * @since 0.0.1
+	 */
 	public function theme_supports() {
 		// Add default posts and comments RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
@@ -109,9 +118,9 @@ class Magic_Grundstein extends Timber\Site {
 	/**
 	 * Returns a substring of a string
 	 *
-	 * @param string $text string to get substring from
-	 * @param int    $start value to start substring at
-	 * @param int    $end value to end substring at
+	 * @param string $text string to get substring from.
+	 * @param int    $start value to start substring at.
+	 * @param int    $end value to end substring at.
 
 	 * @return string returns substring
 	 */
