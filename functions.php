@@ -7,7 +7,21 @@
  * @since  0.0.1
  */
 
-require_once get_template_directory() . '/includes/customizer/customizer.php';
+/**
+ * Require the WordPress admin customizer fields
+ *
+ * @since 0.0.1
+ */
+if ( is_admin() ) {
+	require_once get_template_directory() . '/includes/customizer/customizer.php';
+}
+
+/**
+ * Require the Timber\Site configuration Class
+ *
+ * @since 0.0.1
+ */
+require_once get_template_directory() . '/includes/class-magic-grundstein.php';
 
 /**
  * This ensures that Timber is loaded and available as a PHP class.
@@ -42,4 +56,4 @@ Timber::$dirname = array( 'templates', 'views' );
  */
 Timber::$autoescape = false;
 
-new Magie_Grundstein();
+new Magic_Grundstein();
