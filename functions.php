@@ -24,6 +24,13 @@ if ( is_admin() ) {
 require_once get_template_directory() . '/includes/class-magic-grundstein.php';
 
 /**
+ * Require the less default variables
+ *
+ * @since 0.0.1
+ */
+require_once get_template_directory() . '/includes/less-init.php';
+
+/**
  * This ensures that Timber is loaded and available as a PHP class.
  * If not, it gives an error message to help direct developers on where to activate
  */
