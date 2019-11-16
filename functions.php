@@ -12,9 +12,8 @@
  *
  * @since 0.0.1
  */
-if ( is_admin() ) {
-	require_once get_template_directory() . '/includes/customizer/customizer.php';
-}
+
+require_once get_template_directory() . '/includes/customizer/customizer.php';
 
 /**
  * Require the Timber\Site configuration Class

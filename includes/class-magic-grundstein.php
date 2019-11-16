@@ -20,7 +20,7 @@ class Magic_Grundstein extends Timber\Site {
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
 
-		add_action( 'customize_register', 'mgs_customize_register' );
+		add_action( 'customize_register', 'mgs_customize_register', PHP_INT_MAX - 1 );
 
 		parent::__construct();
 	}
@@ -113,6 +113,15 @@ class Magic_Grundstein extends Timber\Site {
 		);
 
 		add_theme_support( 'menus' );
+
+		$defaults = array(
+			'height'      => 100,
+			'width'       => 400,
+			'flex-height' => true,
+			'flex-width'  => true,
+			'header-text' => array( 'site-title', 'site-description' ),
+		);
+		add_theme_support( 'custom-logo', $defaults );
 	}
 
 	/**

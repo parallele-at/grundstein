@@ -6,12 +6,22 @@ header.main {
 	width: 100%;
 
 	.logo {
+		padding: 10px 0;
+		max-height: 100%;
+		max-width: 30%;
+		box-sizing: border-box;
 		box-shadow: none;
 	}
 }
 
 main {
 	padding-bottom: 10em;
+}
+
+.wrapper {
+	max-width: 1000px;
+	width: 90%;
+	margin: 0 auto;
 }
 
 article {
@@ -44,25 +54,6 @@ footer.main {
 
 	 	span {
 			color: @subtle_color;
-		}
-	}
-}
-
-.wrapper {
-	max-width: 1000px;
-	width: 90%;
-	margin: 0 auto;
-}
-
-@media screen and (min-width: 700px) {
-	header.main {
-		display: inline-block;
-
-		.logo {
-			padding: 10px 0;
-			max-height: 100%;
-			max-width: 30%;
-			box-sizing: border-box;
 		}
 	}
 }

@@ -30,16 +30,16 @@ function mgs_slug_sanitize_radio( string $input, array $setting ) {
  *
  * @since 0.0.1
  *
- * @param array  $wp_customize WordPress customizer instance.
+ * @param object $wp_customize WordPress customizer instance.
  * @param string $name of the input.
  * @param string $label info label.
  * @param int    $priority order this input appears in the list, higher = lower.
  */
-function mgs_add_customizer_section( $wp_customize, $name, $label, $priority = 30 ) {
+function mgs_add_customizer_section( object $wp_customize, string $name, string $label, int $priority = 30 ) {
 	$wp_customize->add_section(
 		$name,
 		array(
-			'title'    => esc_html_raw( $label ),
+			'title'    => esc_html( $label ),
 			'priority' => $priority,
 		)
 	);
@@ -50,7 +50,7 @@ function mgs_add_customizer_section( $wp_customize, $name, $label, $priority = 3
  *
  * @since 0.0.1
  *
- * @param array  $wp_customize WordPress customizer instance.
+ * @param object $wp_customize WordPress customizer instance.
  * @param string $section to put the input in.
  * @param string $name of the input.
  * @param any    $default value of this input.
@@ -59,7 +59,7 @@ function mgs_add_customizer_section( $wp_customize, $name, $label, $priority = 3
  * @param array  $opts options for this section.
  * @param string $sanitize type of sanitizer to run against the input.
  */
-function mgs_add_customizer( array $wp_customize, string $section, string $name, $default, string $label, $control, array $opts = [], string $sanitize = 'sanitize_hex_color' ) {
+function mgs_add_customizer( $wp_customize, string $section, string $name, $default, string $label, $control, array $opts = [], string $sanitize = 'sanitize_hex_color' ) {
 	$setting_options = array(
 		'transport' => 'refresh',
 	);
@@ -79,7 +79,7 @@ function mgs_add_customizer( array $wp_customize, string $section, string $name,
 
 	$def_opts = array(
 		'section'  => $section,
-		'label'    => esc_html_raw( $label ),
+		'label'    => esc_html( $label ),
 		'settings' => $name,
 	);
 
@@ -93,9 +93,9 @@ function mgs_add_customizer( array $wp_customize, string $section, string $name,
  *
  * @since 0.0.1
  *
- * @param array $wp_customize WordPress customizer instance.
+ * @param object $wp_customize WordPress customizer instance.
  */
-function mgs_customize_register( array $wp_customize ) {
+function mgs_customize_register( $wp_customize ) {
 	mgs_add_customizer_section( $wp_customize, 'layout', 'Layout', 20 );
 	mgs_add_customizer_section( $wp_customize, 'header', 'Header' );
 	mgs_add_customizer_section( $wp_customize, 'footer', 'Footer', 40 );
@@ -135,19 +135,25 @@ function mgs_customize_register( array $wp_customize ) {
 	mgs_add_customizer( $wp_customize, 'colors', 'contrast_color', '#00ff00', 'Contrast', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'subtle_color', '#aaa', 'Subtle', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'colors', 'border_alpha', 'ff', 'Border Alpha 0-ff', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'colors', 'body_background_alpha', 'ff', 'Body Background Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'error_color', '#ed1c24', 'Error Color', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'warning_color', '#ffff22', 'Warning Color', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'success_color', '#00ff00', 'Success Color', 'WP_Customize_Color_Control' );
 
 	mgs_add_customizer( $wp_customize, 'header', 'header_background_color', '#191919', 'Header Background', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'header', 'header_background_alpha', 'ff', 'Header Background Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'header_border_color', '#ed1c24', 'Header Border', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'header', 'header_border_alpha', 'ff', 'Header Border Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'menu_layout_id', $menu_layout_settings_options, 'Menu Layout', 'WP_Customize_Control', $menu_layout_options );
 	mgs_add_customizer( $wp_customize, 'header', 'header_link_color', '#fff', 'Header Links', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'header_link_hover_color', '#aaa', 'Header Links Hover', 'WP_Customize_Color_Control' );
 
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_background_color', '#191919', 'Footer Background', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'footer', 'footer_background_alpha', 'ff', 'Footer Background Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_color', '#ed1c24', 'Footer Border', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_alpha', 'ff', 'Footer Border Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_color', '#fff', 'Footer Links', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_hover_color', '#aaa', 'Footer Links Hover', 'WP_Customize_Color_Control' );
 }
