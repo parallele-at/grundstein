@@ -45,6 +45,9 @@ class Magic_Grundstein extends Timber\Site {
 		$context['header_menu'] = new Timber\Menu( 'header' );
 		$context['footer_menu'] = new Timber\Menu( 'footer' );
 
+		$context['social_menu']    = new Timber\Menu( 'social' );
+		$context['languages_menu'] = new Timber\Menu( 'languages' );
+
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		if ( ! empty( $custom_logo_id ) ) {
 			$image           = wp_get_attachment_image_src( $custom_logo_id, 'full' );

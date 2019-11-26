@@ -18,10 +18,24 @@
 						{% endif %}
 					</a>
 
+					<a id="burger">=</a>
+
 					{% if header_menu %}
-					<nav class="main" role="navigation">
-						{% include "menu.twig" with {'menu': header_menu.get_items} %}
-					</nav>
+						<nav class="main" role="navigation">
+							{% include "menu.twig" with {'menu': header_menu.get_items} %}
+						</nav>
+					{% endif %}
+
+					{% if social_menu %}
+						<nav class="social">
+							{% include "menu.twig" with {'menu': social_menu.get_items} %}
+						</nav>
+					{% endif %}
+
+					{% if languages_menu %}
+						<nav class="languages">
+							{% include "menu.twig" with {'menu': languages_menu.get_items} %}
+						</nav>
 					{% endif %}
 				{% endblock %}
 			</section>
@@ -51,5 +65,31 @@
 			</section>
 		</footer>
 		{% endblock %}
+
+		<script>
+			var hide = false;
+			var b = document.querySelector("#burger")
+			var header = document.querySelector("header.main")
+			var firstLink = document.querySelector("nav.main ul li a")
+			var logo = document.querySelector("header.main .logo")
+
+			function clickToggle(e) {
+				if (e.target === firstLink && !hide) {
+					return true
+				}
+
+				if (window.innerWidth < 1000) {
+					e.preventDefault()
+					header.classList.toggle("hide")
+					hide = !hide		
+					return false
+				}
+			}
+
+			[header].forEach(function(link) {
+				link.addEventListener("click", clickToggle)
+			})
+
+		</script>
 	</body>
 </html>
