@@ -12,21 +12,6 @@
 					{{ post.content }}
 				</div>
 			</section>
-
-			<section class="comment-box">
-				<div class="comments">
-				  {% if post.comments %}
-					<h3> comments </h3>
-					{% for cmt in post.comments %}
-					  {% include "comment.twig" with {comment:cmt} %}
-					{% endfor %}
-				  {% endif %}
-				</div>
-
-				{% if post.comment_status != "closed" %}
-				  {% include "comment-form.twig" %}
-				{% endif %}
-			</section>
 		</article>
-	</div><!-- /content-wrapper -->
+	</div>
 {% endblock %}
