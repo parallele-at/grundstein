@@ -42,11 +42,18 @@ class Magic_Grundstein extends Timber\Site {
 	 */
 	public function add_to_context( $context ) {
 		$context['site']        = $this;
-		$context['header_menu'] = new Timber\Menu( 'header' );
-		$context['footer_menu'] = new Timber\Menu( 'footer' );
 
-		$context['social_menu']    = new Timber\Menu( 'social' );
-		$context['languages_menu'] = new Timber\Menu( 'languages' );
+		if (is_nav_menu('header')) {
+			$context['header_menu'] = new Timber\Menu( 'header' );
+		}
+
+		if (is_nav_menu('social')) {
+			$context['social_menu']    = new Timber\Menu( 'social' );
+			$context['footer_menu'] = new Timber\Menu( 'social' );
+		}
+		if (is_nav_menu('languages')) {
+			$context['languages_menu'] = new Timber\Menu( 'languages' );
+		}
 
 		$custom_logo_id = get_theme_mod( 'custom_logo' );
 		if ( ! empty( $custom_logo_id ) ) {
