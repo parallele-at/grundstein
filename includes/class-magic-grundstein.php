@@ -61,6 +61,8 @@ class Magic_Grundstein extends Timber\Site {
 			$context['logo'] = $image[0];
 		}
 
+		$context['magic_social_menu_widgets'] = Timber::get_widgets('magic_social_menu_widgets');
+
 		$context['is_admin'] = current_user_can( 'manage_options' );
 
 		return $context;
@@ -131,7 +133,15 @@ class Magic_Grundstein extends Timber\Site {
 			'flex-width'  => true,
 			'header-text' => array( 'site-title', 'site-description' ),
 		);
+
 		add_theme_support( 'custom-logo', $defaults );
+
+		register_sidebar(array(
+			'name' => 'Magic Social Menu',
+			'id' => 'magic_social_menu_widgets',
+			// remove wrapper div
+			'before_widget' => '',
+		));
 	}
 
 	/**

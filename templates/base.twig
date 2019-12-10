@@ -30,11 +30,7 @@
 						</nav>
 					{% endif %}
 
-					{% if social_menu %}
-						<nav class="social">
-							{% include "menu.twig" with {'menu': social_menu.get_items} %}
-						</nav>
-					{% endif %}
+					{{ magic_social_menu_widgets }}
 
 					{% if languages_menu %}
 						<nav class="languages">
