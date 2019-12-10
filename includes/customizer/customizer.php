@@ -135,16 +135,16 @@ function mgs_customize_register( $wp_customize ) {
 	mgs_add_customizer( $wp_customize, 'colors', 'contrast_color', '#00ff00', 'Contrast', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'subtle_color', '#aaa', 'Subtle', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'border_color', '#ed1c24', 'Borders', 'WP_Customize_Color_Control' );
-	mgs_add_customizer( $wp_customize, 'colors', 'border_alpha', 'ff', 'Border Alpha 0-ff', 'WP_Customize_Color_Control' );
-	mgs_add_customizer( $wp_customize, 'colors', 'body_background_color', '#3c3c3c', 'Body Background', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'colors', 'border_alpha', 'ff', 'Border Alpha 0-ff', 'WP_Customize_Control' );
+	mgs_add_customizer( $wp_customize, 'colors', 'body_background_color', '#000000', 'Body Background', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'body_background_alpha', 'ff', 'Body Background Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'error_color', '#ed1c24', 'Error Color', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'warning_color', '#ffff22', 'Warning Color', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'colors', 'success_color', '#00ff00', 'Success Color', 'WP_Customize_Color_Control' );
 
-	mgs_add_customizer( $wp_customize, 'header', 'header_background_color', '#191919', 'Header Background', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'header', 'header_background_color', '#000000', 'Header Background', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'header_background_alpha', 'ff', 'Header Background Alpha 00-ff', 'WP_Customize_Control' );
-	mgs_add_customizer( $wp_customize, 'header', 'header_border_color', '#ed1c24', 'Header Border', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'header', 'header_border_color', '#000000', 'Header Border', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'header_border_alpha', 'ff', 'Header Border Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'header', 'menu_layout_id', $menu_layout_settings_options, 'Menu Layout', 'WP_Customize_Control', $menu_layout_options );
 	mgs_add_customizer( $wp_customize, 'header', 'header_link_color', '#fff', 'Header Links', 'WP_Customize_Color_Control' );
@@ -152,7 +152,7 @@ function mgs_customize_register( $wp_customize ) {
 
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_background_color', '#191919', 'Footer Background', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_background_alpha', 'ff', 'Footer Background Alpha 00-ff', 'WP_Customize_Control' );
-	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_color', '#ed1c24', 'Footer Border', 'WP_Customize_Color_Control' );
+	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_color', '#191919', 'Footer Border', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_border_alpha', 'ff', 'Footer Border Alpha 00-ff', 'WP_Customize_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_color', '#fff', 'Footer Links', 'WP_Customize_Color_Control' );
 	mgs_add_customizer( $wp_customize, 'footer', 'footer_link_hover_color', '#aaa', 'Footer Links Hover', 'WP_Customize_Color_Control' );
