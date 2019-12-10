@@ -18,7 +18,11 @@
 						{% endif %}
 					</a>
 
-					<a id="burger">=</a>
+					<a id="burger">
+						<div></div>
+						<div></div>
+						<div></div>
+					</a>
 
 					{% if header_menu %}
 						<nav class="main" role="navigation">
@@ -67,29 +71,28 @@
 		{% endblock %}
 
 		<script>
-			var hide = false;
+			var hide = localStorage ? localStorage.hide : false;
 			var b = document.querySelector("#burger")
 			var header = document.querySelector("header.main")
-			var firstLink = document.querySelector("nav.main ul li a")
-			var logo = document.querySelector("header.main .logo")
+			var logo = header.querySelector(".logo")
+
+			if (hide && !header.classList.contains("hide")) {
+				header.classList.add("hide")
+			}
 
 			function clickToggle(e) {
-				if (e.target === firstLink && !hide) {
-					return true
-				}
-
 				if (window.innerWidth < 1000) {
 					e.preventDefault()
 					header.classList.toggle("hide")
-					hide = !hide		
+					hide = !hide
+					localStorage.hide = hide
 					return false
 				}
 			}
 
-			[header].forEach(function(link) {
+			[logo, b].forEach(function(link) {
 				link.addEventListener("click", clickToggle)
 			})
-
 		</script>
 	</body>
 </html>
