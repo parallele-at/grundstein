@@ -67,7 +67,8 @@
 		{% endblock %}
 
 		<script>
-			var hide = localStorage ? localStorage.hide : false;
+			var hide = typeof localStorage.hide !== 'undefined' ? localStorage.hide : true;
+
 			var b = document.querySelector("#burger")
 			var header = document.querySelector("header.main")
 			var logo = header.querySelector(".logo")
